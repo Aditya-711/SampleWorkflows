@@ -15,6 +15,10 @@ on:
       template:
         description: "Template to use"
         required: true
+      port_context:
+        required: true
+        description: "Details about the action and general context (blueprint, run id, etc...)"
+        type: string
 
 jobs:
   create-repo:
