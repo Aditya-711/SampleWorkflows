@@ -19,7 +19,10 @@ on:
         required: true
         description: "Details about the action and general context (blueprint, run id, etc...)"
         type: string
-
+        
+permissions:
+  contents: write 
+  
 jobs:
   create-repo:
     runs-on: ubuntu-latest
