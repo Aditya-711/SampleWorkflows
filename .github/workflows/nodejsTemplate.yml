@@ -6,8 +6,11 @@ on:
       repo_name:
         description: "Name of the new repository"
         required: true
+      description:
+        description: "Describe the repo"
+        required: true
       provider:
-        description: "Description of repository"
+        description: "provider of repository"
         required: true
       template:
         description: "Template to use"
