@@ -75,8 +75,8 @@ jobs:
       - name: Initialize Python Project
         if: ${{ github.event.inputs.template == 'Python' }}
         run: |
-          mkdir temp-project
-          cd temp-project
+          mkdir ${{ github.event.inputs.repo_name }}
+          cd ${{ github.event.inputs.repo_name }}
           echo "print('Hello from ${{ github.event.inputs.repo_name }}')" > app.py
           echo "__pycache__/" > .gitignore
           git init
@@ -84,7 +84,7 @@ jobs:
           git config user.email "actions@github.com"
           
           if [ "${{ github.event.inputs.provider }}" = "GitHub" ]; then
-            git remote add origin https://github.com/${{ github.repository_owner }}/${{ github.event.inputs.repo_name }}.git
+            git remote add origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/${{ github.event.inputs.repo_name }}.git
           else
             git remote add origin https://x-token-auth:${{ secrets.BB_APP_PASSWORD }}@bitbucket.org/${{ secrets.BB_WORKSPACE }}/${{ github.event.inputs.repo_name }}.git
           fi
