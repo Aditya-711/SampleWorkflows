@@ -47,3 +47,15 @@ jobs:
           git commit -m "Initial commit - Node.js project"
           git branch -M main
           git push origin main
+
+      - name: Notify Port
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          operation: PATCH_RUN
+          baseUrl: https://api.getport.io
+          runId: ${{ fromJson(inputs.port_context).runId }}
+          logMessage: |
+            Repository initialized
+          status: SUCCESS
