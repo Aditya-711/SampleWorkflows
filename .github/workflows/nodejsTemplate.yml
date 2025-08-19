@@ -1,1 +1,46 @@
+name: Create Node.js Project Repo
 
+on:
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: "Name of the new repository"
+        required: true
+      provider:
+        description: "Description of repository"
+        required: true
+      template:
+        description: "Template to use"
+        required: true
+
+jobs:
+  create-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GitHub CLI
+        run: echo "${{ secrets.GH_PAT }}" | gh auth login --with-token
+
+      - name: Create repository
+        run: |
+          gh repo create ${{ github.repository_owner }}/${{ github.event.inputs.repo_name }} \
+            --public \
+            --description "${{ github.event.inputs.description }}" \
+            --confirm
+
+      - name: Initialize Node.js project
+        run: |
+          mkdir ${{github.event.inputs.repo_name}}
+          cd ${{github.event.inputs.repo_name}}
+          npm init -y
+          echo "console.log('Hello from ${{ github.event.inputs.repo_name }}');" > index.js
+          git init
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git remote add origin https://github.com/${{ github.repository_owner }}/${{ github.event.inputs.repo_name }}.git
+          git add .
+          git commit -m "Initial commit - Node.js project"
+          git branch -M main
+          git push origin main
