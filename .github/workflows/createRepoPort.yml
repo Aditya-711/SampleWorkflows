@@ -37,7 +37,7 @@ jobs:
             --confirm
 
       - name: Create Bitbucket Repo
-        if: ${{ github.event.inputs.provider == 'Bitbucket' }}
+        if: ${{ github.event.inputs.provider == 'BitBucket' }}
         run: |
           curl -X POST -u "${{ secrets.BB_USER }}:${{ secrets.BB_APP_PASSWORD }}" \
             -H "Content-Type: application/json" \
