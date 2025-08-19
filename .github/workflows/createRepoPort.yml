@@ -49,7 +49,7 @@ jobs:
             }'
 
       - name: Initialize Node.js Project
-        if: ${{ github.event.inputs.template == 'Node.js' }}
+        if: ${{ github.event.inputs.template == 'Nodejs' }}
         run: |
           mkdir ${{ github.event.inputs.repo_name }}
           cd ${{ github.event.inputs.repo_name }}
