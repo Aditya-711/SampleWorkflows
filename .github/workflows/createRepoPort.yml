@@ -45,7 +45,8 @@ jobs:
             -d '{
               "scm": "git",
               "is_private": true,
-              "description": "${{ github.event.inputs.description }}"
+              "description": "${{ github.event.inputs.description }}",
+              "project": { "key": "PROJ" }
             }'
 
       - name: Initialize Node.js Project
