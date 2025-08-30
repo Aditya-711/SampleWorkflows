@@ -75,7 +75,7 @@ jobs:
           `);
           });
           app.listen(3000, '0.0.0.0', () => {
-          console.log(\`Server running at http://localhost:\${port}\`);
+          console.log("server running at 3000");
           });
           EOF
           git init
