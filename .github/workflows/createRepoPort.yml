@@ -56,7 +56,28 @@ jobs:
           cd ${{ github.event.inputs.repo_name }}
           npm init -y
           npm i express
-          echo "console.log('Hello from ${{ github.event.inputs.repo_name }}');" > index.js
+          cat << 'EOF' > index.js
+          const express = require('express');
+          const app = express();
+          const port = 3000;
+          app.get('/', (req, res) => {
+          res.send(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Sample App</title>
+          </head>
+          <body>
+            <h1>Hello ADitya!</h1>
+            <p>This is a very simple HTML page.</p>
+          </body>
+          </html>
+          `);
+          });
+          app.listen(3000, '0.0.0.0', () => {
+          console.log(\`Server running at http://localhost:\${port}\`);
+          });
+          EOF
           git init
           git config user.name "github-actions"
           git config user.email "actions@github.com"
